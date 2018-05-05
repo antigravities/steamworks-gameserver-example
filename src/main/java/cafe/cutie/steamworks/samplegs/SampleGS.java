@@ -2,10 +2,12 @@ package cafe.cutie.steamworks.samplegs;
 
 import com.codedisaster.steamworks.SteamGameServerAPI;
 import com.codedisaster.steamworks.SteamException;
+
 import java.util.Scanner;
 
 class SampleGS {
   static boolean running = true;
+  static final int TicketSize = 40;
   
   public static void main(String[] args){
     try {
@@ -22,11 +24,14 @@ class SampleGS {
       
       @Override
       public void run(){
+        ServerListener l = new ServerListener(3939);
+        
         while( running ){
           SteamGameServerAPI.runCallbacks();
         }
         
         SteamGameServerAPI.shutdown();
+        l.shutdown();
         
         System.out.println("Sayonara!");
       }
